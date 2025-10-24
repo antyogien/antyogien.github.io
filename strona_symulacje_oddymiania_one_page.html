@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="pl-PL">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AntyOgień — symulacje oddymiania klatek schodowych, garaży i pomieszczeń | CFD/FDS</title>
+  <meta name="description" content="Profesjonalne symulacje oddymiania: klatki schodowe, garaże podziemne oraz pomieszczenia. Raporty, animacje, warianty projektowe, wsparcie przy uzgodnieniach. Lekka i szybka strona – bez ciasteczek.">
+  <meta name="theme-color" content="#0a2a43" />
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AntyOgień — symulacje oddymiania (oferta)">
+  <meta property="og:description" content="Symulacje oddymiania klatek schodowych, garaży i pomieszczeń. Raporty, animacje, warianty projektowe, wsparcie w uzgodnieniach.">
+  <meta property="og:locale" content="pl_PL">
+  <link rel="canonical" href="/">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    :root {
+      --bg: #0a1016;
+      --card: #0f1a24;
+      --muted: #8aa3b6;
+      --text: #eaf2f9;
+      --brand: #ff7a00;
+      --brand-2: #ffb703;
+      --accent: #ffe566;
+      --ok: #5cffb5;
+      --warn: #ffd166;
+      --danger: #ff6b6b;
+      --radius: 16px;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f6fafc;
+        --card: #ffffff;
+        --muted: #4d6575;
+        --text: #0b1720;
+        --brand: #026aa7;
+        --brand-2: #0c8c6a;
+        --accent: #b7791f;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text); background: radial-gradient(1400px 800px at 40% -100px, rgba(47,179,255,.08), transparent),
+                radial-gradient(1200px 700px at 90% -120px, rgba(92,255,181,.06), transparent), var(--bg);
+    }
+    a { color: var(--brand); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(120%) blur(8px);
+      background: color-mix(in oklab, var(--bg) 80%, transparent);
+      border-bottom: 1px solid color-mix(in oklab, var(--muted) 30%, transparent);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; letter-spacing: .3px; }
+    .brand .logo {
+      width: 36px; height: 36px; display: grid; place-items: center; border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2)); box-shadow: var(--shadow);
+    }
+    .brand small { display:block; font-weight: 600; color: var(--muted); letter-spacing: .2px; margin-top: -3px; }
+    nav a { margin-left: 18px; padding: 8px 10px; border-radius: 10px; }
+    nav a:hover { background: color-mix(in oklab, var(--card) 85%, transparent); text-decoration: none; }
+    .hamb { display:none; background: none; border: none; padding: 8px; border-radius: 10px; }
+
+    .hero { padding: 48px 0 32px; }
+    .hero h1 { font-size: clamp(28px, 4.2vw, 48px); line-height: 1.1; margin: 0 0 14px; }
+    .hero p.lead { font-size: clamp(16px, 2.4vw, 20px); color: var(--muted); margin: 0 0 22px; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display:inline-flex; align-items:center; gap:10px; border:1px solid color-mix(in oklab, var(--brand) 35%, var(--text) 0%); padding:12px 16px; border-radius: 12px; font-weight:700; cursor:pointer; background: color-mix(in oklab, var(--brand) 12%, var(--card)); color: var(--text); }
+    .btn:hover { filter: brightness(1.05); text-decoration: none; }
+    .btn.alt { background: transparent; border-color: color-mix(in oklab, var(--muted) 30%, transparent); color: var(--text); }
+    .badges { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+    .badge { font-size: 13px; color: var(--text); border:1px solid color-mix(in oklab, var(--muted) 30%, transparent); padding:6px 10px; border-radius: 999px; }
+
+    section { padding: 44px 0; }
+    .grid { display:grid; gap:18px; grid-template-columns: repeat(12, 1fr); }
+    .card { background: color-mix(in oklab, var(--card) 96%, transparent); border: 1px solid color-mix(in oklab, var(--muted) 24%, transparent); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    h2 { font-size: clamp(22px, 3vw, 34px); margin: 0 0 14px; }
+    h3 { margin: 0 0 10px; font-size: 18px; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px 20px; }
+    .icon { width: 22px; height: 22px; display:inline-block; vertical-align: -4px; }
+
+    .svc .card { grid-column: span 4; min-height: 100%; }
+    @media (max-width: 900px){ .svc .card { grid-column: span 12; }}
+
+    .steps { counter-reset: step; }
+    .step { position:relative; padding-left: 56px; margin: 14px 0; }
+    .step::before{ counter-increment: step; content: counter(step); position:absolute; left: 0; top: 0; width:40px; height:40px; border-radius: 12px; display:grid; place-items:center; font-weight: 800; background: linear-gradient(135deg,var(--brand),var(--brand-2)); color:#000; }
+
+    .deliver .card { grid-column: span 6; }
+    @media (max-width: 900px){ .deliver .card { grid-column: span 12; }}
+
+    .checklist .card { grid-column: span 12; }
+    .checklist .controls { display:flex; gap:8px; flex-wrap:wrap; margin: 6px 0 12px; }
+    .pill { padding: 8px 12px; border-radius: 999px; border:1px solid color-mix(in oklab, var(--muted) 30%, transparent); cursor:pointer; background: transparent; }
+    .pill.active { background: color-mix(in oklab, var(--brand) 18%, var(--card)); border-color: color-mix(in oklab, var(--brand) 40%, transparent); }
+    .reqs { columns: 2; column-gap: 24px; }
+    @media (max-width: 700px){ .reqs { columns: 1; }}
+    .reqs li { break-inside: avoid; margin-bottom: 8px; }
+
+    .faq .card { grid-column: span 6; }
+    @media (max-width: 900px){ .faq .card { grid-column: span 12; }}
+
+    form { display:grid; gap:10px; grid-template-columns: repeat(12, 1fr); }
+    form .field { grid-column: span 6; }
+    form .field.full { grid-column: span 12; }
+    input, textarea, select { width:100%; background: color-mix(in oklab, var(--card) 90%, transparent); border:1px solid color-mix(in oklab, var(--muted) 28%, transparent); color: var(--text); padding: 12px 14px; border-radius: 12px; outline: none; }
+    textarea { min-height: 120px; resize: vertical; }
+    .hint { color: var(--muted); font-size: 13px; }
+
+    .foot { font-size: 14px; color: var(--muted); border-top:1px solid color-mix(in oklab, var(--muted) 24%, transparent); padding: 18px 0 40px; }
+    .foot .cols { display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .foot .col { grid-column: span 4; }
+    @media (max-width: 900px){ .foot .col { grid-column: span 12; }}
+
+    .to-top { position: fixed; right: 16px; bottom: 16px; border-radius: 999px; padding: 10px 14px; background: color-mix(in oklab, var(--brand) 16%, var(--card)); border: 1px solid color-mix(in oklab, var(--brand) 30%, transparent); box-shadow: var(--shadow); display:none; }
+
+    /* accessibility */
+    .skip { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip:focus { position: static; width: auto; height: auto; background: var(--accent); color:#000; padding:8px; border-radius:8px; }
+
+    @media (prefers-reduced-motion: reduce){
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
+  <script>
+    // mobile nav
+    function toggleNav(){
+      const n = document.querySelector('header nav');
+      n.classList.toggle('open');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamb = document.querySelector('.hamb');
+      if(hamb){ hamb.addEventListener('click', toggleNav); }
+
+      // show to-top button
+      const topBtn = document.querySelector('.to-top');
+      const ob = new IntersectionObserver((e)=>{ topBtn.style.display = e[0].isIntersecting ? 'none' : 'inline-flex'; }, { threshold: .1 });
+      ob.observe(document.querySelector('header'));
+
+      // checklist logic
+      const pills = document.querySelectorAll('.pill');
+      const base = [
+        'Rzuty i przekroje (PDF/DWG) z wymiarami i wysokościami kondygnacji',
+        'Lokalizacja obiektu, przeznaczenie, liczba kondygnacji i kubatura',
+        'Scenariusze pożarowe: lokalizacja źródła, HRR (kW), czas rozwoju',
+        'Założenia projektowe: warunki ewakuacji, kryteria widoczności/temperatury',
+        'Opis działania SSP/DSO oraz zasilania awaryjnego (jeśli dotyczy)',
+        'Warianty do porównania (np. różne powierzchnie napowietrzania, prędkości)',
+        'Termin i oczekiwane formaty wyników (PDF/MP4/DWG)',
+      ];
+      const map = {
+        klatki: [
+          'Typ klatki (zamknięta/otwarta, N/S) i sposób napowietrzania/oddymiania',
+          'Wymiary szybu, drzwi, przedsionków; lokalizacja klap i czujek',
+          'Parametry projektowe systemu (PN-EN 12101-6): różnice ciśnień / wydatki [m³/h]',
+        ],
+        garaze: [
+          'Geometria garażu (łączna powierzchnia, wysokość netto, przeszkody, rampy)',
+          'Przyjęte kryteria (PN-EN 12101, prędkości strumienia, warstwa dymu)',
+          'Lokalizacja wentylatorów, klap, wlotów; reżimy pracy i sterowanie',
+        ],
+        pomieszczenia: [
+          'Układ i wysokości pomieszczeń; otwory drzwiowe/okienne (czynne/bierne)',
+          'Źródło pożaru, moc, dymotwórczość; warunki brzegowe i nawiewne',
+          'Kryteria komfortu/bezpieczeństwa (temperatura, widoczność, toksyczność)',
+        ],
+      };
+      const reqList = document.querySelector('#req-list');
+      function renderReqs(active){
+        const extra = active.flatMap(k => map[k]||[]);
+        const all = [...base, ...extra];
+        reqList.innerHTML = all.map(x=>`<li>${x}</li>`).join('');
+      }
+      const active = new Set(['klatki','garaze','pomieszczenia']);
+      pills.forEach(p=>{
+        p.addEventListener('click', ()=>{
+          const key = p.dataset.key;
+          if(p.classList.toggle('active')) active.add(key); else active.delete(key);
+          renderReqs([...active]);
+        });
+      });
+      renderReqs([...active]);
+
+      // export checklist as .txt
+      document.querySelector('#export-checklist').addEventListener('click', ()=>{
+        const lines = Array.from(reqList.querySelectorAll('li')).map(li=>`• ${li.textContent}`);
+        const blob = new Blob([
+          'CHECKLISTA – dane do wyceny symulacji oddymiania\n\n',
+          lines.join('\n'),
+          '\n\n(Dołącz: PDF/DWG, opis scenariusza, wymagania inwestora/uzgodnień.)\n'
+        ], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = Object.assign(document.createElement('a'), { href: url, download: 'checklista_symulacje_oddymiania.txt' });
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      });
+
+      // copy email
+      const copy = document.querySelector('#copy-email');
+      copy?.addEventListener('click', ()=>{
+        const email = document.querySelector('#email-address').textContent.trim();
+        navigator.clipboard.writeText(email).then(()=>{
+          copy.textContent = 'Skopiowano ✔';
+          setTimeout(()=>copy.textContent='Kopiuj e‑mail', 1800);
+        });
+      });
+    });
+  </script>
+  <style>
+    /* tiny inline nav open state to keep CSS together */
+    header nav.open { position: absolute; left: 0; right: 0; top: 62px; background: color-mix(in oklab, var(--bg) 96%, transparent); padding: 10px 14px; border-bottom: 1px solid color-mix(in oklab, var(--muted) 24%, transparent); }
+    @media (max-width: 860px){
+      nav a { display:block; margin: 6px 0; }
+      .hamb { display:inline-flex; }
+    }
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "AntyOgień — Symulacje oddymiania",
+      "legalName": "Ochrona Przeciwpożarowa Błażej Błażejewski",
+      "description": "Symulacje oddymiania klatek schodowych, garaży i pomieszczeń (CFD/FDS). Raporty, animacje, wsparcie projektowe i uzgodnienia.",
+      "url": "https://example.com",
+      "areaServed": "PL",
+      "serviceType": ["Symulacje oddymiania klatek schodowych", "Symulacje oddymiania garaży", "Symulacje oddymiania pomieszczeń"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Pienista 51B/15",
+        "postalCode": "94-109",
+        "addressLocality": "Łódź",
+        "addressCountry": "PL"
+      },
+      "taxID": "PL7272763514",
+      "identifier": [
+        {"@type": "PropertyValue", "name": "REGON", "value": "368339213"}
+      ]
+    }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Przejdź do treści</a>
+  <header id="top">
+    <div class="container nav">
+      <div class="brand">
+        <span class="logo" aria-hidden="true">
+          <!-- simple inline logo -->
+          <img src="logo.png" alt="AntyOgień — logo" width="28" height="28" style="display:block;border-radius:6px">
+        </span>
+        <div>
+          AntyOgień
+          <small>Symulacje oddymiania: klatki • garaże • pomieszczenia</small>
+        </div>
+      </div>
+      <nav aria-label="Główna nawigacja">
+        <a href="#oferta">Oferta</a>
+        <a href="#proces">Jak pracujemy</a>
+        <a href="#wyniki">Co dostajesz</a>
+        <a href="#wycena">Dane do wyceny</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt" class="btn">Kontakt</a>
+      </nav>
+      <button class="hamb btn alt" aria-label="Otwórz menu">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Symulacje oddymiania <span style="white-space:nowrap">klatek schodowych</span>, garaży i pomieszczeń</h1>
+        <p class="lead">Weryfikujemy założenia projektu i pokazujemy, jak działa system w scenariuszach pożarowych. Otrzymujesz czytelny raport, animacje z przebiegu dymu oraz konkretne rekomendacje.</p>
+        <div class="cta">
+          <a class="btn" href="#wycena">Zamów wycenę</a>
+          <a class="btn alt" href="#oferta">Zobacz ofertę</a>
+        </div>
+        <div class="badges" aria-label="Cechy serwisu">
+          <span class="badge">Lekka strona – bez ciasteczek</span>
+          <span class="badge">Czytelne raporty PDF</span>
+          <span class="badge">Animacje MP4 z przebiegu dymu</span>
+          <span class="badge">Warianty i optymalizacja</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="oferta" class="svc">
+      <div class="container">
+        <h2>Oferta</h2>
+        <div class="grid">
+          <article class="card" aria-labelledby="svc1">
+            <h3 id="svc1">Klatki schodowe / przedsionki</h3>
+            <p>Symulacje systemów różnicowania ciśnienia oraz grawitacyjnego/wyciągowego oddymiania dla klatek, szybów i przedsionków. Analizujemy szczeliny, nieszczelności, działanie drzwi oraz scenariusze ewakuacji.</p>
+            <ul>
+              <li>Weryfikacja założeń (np. PN‑EN 12101‑6 – systemy różnicowania ciśnień)</li>
+              <li>Parametryzacja otwarć drzwi i zadziałania SSP</li>
+              <li>Bilans powietrza / dobór wydatków i ciśnień</li>
+            </ul>
+          </article>
+
+          <article class="card" aria-labelledby="svc2">
+            <h3 id="svc2">Garaże podziemne</h3>
+            <p>Symulacje wentylacji pożarowej: systemy strumieniowe (jet‑fan) i kanałowe, warstwa dymu, prędkości krytyczne, widoczność i temperatury w korytarzach oraz przy bramach/rampach.</p>
+            <ul>
+              <li>Ocena spełnienia kryteriów (np. PN‑EN 12101, wytyczne projektowe)</li>
+              <li>Rozmieszczenie wentylatorów, scenariusze sterowania</li>
+              <li>Warianty mocy pożaru, lokalizacji i reżimów pracy</li>
+            </ul>
+          </article>
+
+          <article class="card" aria-labelledby="svc3">
+            <h3 id="svc3">Pomieszczenia i przestrzenie</h3>
+            <p>Modele CFD dla hal, atriów i pomieszczeń: rozkład dymu, temperatury, wpływ nawiewów i otwarć, skuteczność klap dymowych i wyciągów mechanicznych.</p>
+            <ul>
+              <li>Oddymianie grawitacyjne i mechaniczne (np. PN‑EN 12101‑2/‑8)</li>
+              <li>Analiza warunków ewakuacji (widoczność, temperatura, toksyczność)</li>
+              <li>Optymalizacja układu klap, kanałów i nawiewów</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="proces">
+      <div class="container">
+        <h2>Jak pracujemy</h2>
+        <div class="card">
+          <div class="steps">
+            <div class="step"><strong>Materiały wejściowe.</strong> Otrzymujemy rysunki (PDF/DWG), opis systemu i scenariusze pożarowe.</div>
+            <div class="step"><strong>Model i warianty.</strong> Budujemy model CFD (np. FDS lub równoważne), uzgadniamy warianty i kryteria oceny.</div>
+            <div class="step"><strong>Symulacje.</strong> Uruchamiamy serie obliczeń dla uzgodnionych scenariuszy.</div>
+            <div class="step"><strong>Wyniki.</strong> Przygotowujemy animacje, przekroje, wykresy i mapy pól.</div>
+            <div class="step"><strong>Rekomendacje.</strong> Proponujemy korekty układu i parametry pracy systemu.</div>
+          </div>
+          <p class="hint">Terminy i zakres uzgadniamy indywidualnie do wielkości obiektu i liczby wariantów.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="wyniki" class="deliver">
+      <div class="container">
+        <h2>Co dostajesz w standardzie</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Raport PDF</h3>
+            <ul>
+              <li>Założenia, scenariusze i parametry modelu</li>
+              <li>Wyniki: mapy dymu/temperatur, przekroje, wykresy</li>
+              <li>Ocena kryteriów i wnioski dla uzgodnień</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Animacje MP4</h3>
+            <ul>
+              <li>Przebieg rozwoju pożaru i dymu w czasie</li>
+              <li>Warstwa dymu, wektory przepływu, działanie urządzeń</li>
+              <li>Wersje „do prezentacji” dla Inwestora/UZP</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Materiały dodatkowe</h3>
+            <ul>
+              <li>Rysunki DWG/DXF lokalizacji urządzeń i przekrojów</li>
+              <li>Porównanie wariantów z rekomendacją</li>
+              <li>Krótkie podsumowanie „executive summary”</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Wsparcie</h3>
+            <ul>
+              <li>Odpowiedzi na uwagi i pytania w toku uzgodnień</li>
+              <li>Możliwość dopracowania wybranego wariantu</li>
+              <li>Wsparcie przy prezentacji dla Zespołu Projektowego</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="wycena" class="checklist">
+      <div class="container">
+        <h2>Dane do wyceny</h2>
+        <div class="card">
+          <div class="controls" role="group" aria-label="Zakres symulacji">
+            <button class="pill active" data-key="klatki">Klatki schodowe</button>
+            <button class="pill active" data-key="garaze">Garaże</button>
+            <button class="pill active" data-key="pomieszczenia">Pomieszczenia</button>
+          </div>
+          <ul id="req-list" class="reqs"></ul>
+          <div class="cta">
+            <button id="export-checklist" class="btn" type="button">Pobierz checklistę .txt</button>
+            <a class="btn alt" href="#kontakt">Prześlij zapytanie</a>
+          </div>
+          <p class="hint">Nie masz części danych? Wyślij to, co jest – pomożemy domknąć założenia.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="faq">
+      <div class="container">
+        <h2>Najczęstsze pytania</h2>
+        <div class="grid">
+          <div class="card"><h3>Na jakich normach się opieracie?</h3><p>W zależności od zakresu: rodzina PN‑EN 12101 (m.in. część 2, 6, 8), wytyczne projektowe i dobre praktyki inżynierskie. Zawsze jasno wskazujemy podstawy oceny w raporcie.</p></div>
+          <div class="card"><h3>Jakie formaty plików przyjmujecie?</h3><p>Preferowane: PDF/DWG/DXF z rzutami i przekrojami. Dodatkowo opisy scenariuszy, schematy elektryczne/sterowania i założenia projektowe.</p></div>
+          <div class="card"><h3>Czy przygotowujecie kilka wariantów?</h3><p>Tak, warianty są możliwe – zwykle porównujemy 2–3 rozwiązania (np. inne powierzchnie napowietrzania, inne wydatki/prędkości). Liczbę wariantów ustalamy indywidualnie.</p></div>
+          <div class="card"><h3>Jak wyglądają animacje?</h3><p>Dostarczamy pliki MP4 pokazujące rozkład dymu, temperatury, czasami wektory przepływu. Możliwe podpisy/legendy w jęz. PL.</p></div>
+          <div class="card"><h3>Co z danymi i prywatnością?</h3><p>Nie używamy ciasteczek, nie śledzimy użytkowników. Pliki i informacje projektowe traktujemy poufnie.</p></div>
+          <div class="card"><h3>Czy pomożecie w uzgodnieniach?</h3><p>Tak – odpowiadamy na uwagi i doprecyzowujemy wyniki pod potrzeby uzgodnień i decyzji projektowych.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="container">
+        <h2>Kontakt</h2>
+        <div class="card">
+          <div class="grid" style="align-items:start;">
+            <div style="grid-column: span 6;">
+              <p><strong>Dane firmy</strong></p>
+              <p>
+                AntyOgień — Błażej Błażejewski<br>ul. Pienista 51B/15, 94‑109 Łódź<br><small>Adres do korespondencji: ul. Falista 71, 94‑115 Łódź</small>
+              </p>
+              <p>
+                <strong>NIP:<\/strong> 7272763514 &nbsp;·&nbsp; <strong>REGON:<\/strong> 368339213
+              </p>
+              <p><strong>E‑mail:</strong> <span id="email-address">(wstaw e‑mail)</span> · <button id="copy-email" class="pill" type="button">Kopiuj e‑mail</button><br>
+              <strong>Telefon:</strong> (wstaw telefon)</p>
+              <p class="hint">Preferujesz rozmowę? Zadzwoń – szybciej ustalimy zakres i terminy.</p>
+            </div>
+            <div style="grid-column: span 6;">
+              <form aria-label="Formularz kontaktowy" name="contact" method="post" action="mailto:biuro@example.com" enctype="text/plain" target="_blank">
+                <input type="text" name="_hp" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true"> <!-- honeypot -->
+                <div class="field"><label>Imię i nazwisko<br><input required name="name" placeholder="Jan Kowalski"></label></div>
+                <div class="field"><label>E‑mail<br><input required type="email" name="email" placeholder="jan.kowalski@firma.pl"></label></div>
+                <div class="field full"><label>Wiadomość / zapytanie<br><textarea required name="message" placeholder="Krótki opis obiektu, zakres symulacji, załączniki/odnośniki do plików…"></textarea></label></div>
+                <div class="field full">
+                  <button class="btn" type="submit">Wyślij</button>
+                  <span class="hint">Kliknięcie uruchomi domyślny program pocztowy. Jeśli wolisz, napisz bezpośrednio na <a href="mailto:biuro@example.com">biuro@example.com</a>.</span>
+                </div>
+              </form>
+            </div>
+          </div>
+          <p class="hint" style="margin-top:10px">RODO: Przekazane dane wykorzystamy wyłącznie do przygotowania odpowiedzi/oferty. Nie stosujemy plików cookie.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="container foot">
+    <div class="cols">
+      <div class="col">
+        <strong>AntyOgień</strong>
+        <p>Symulacje oddymiania klatek schodowych, garaży podziemnych i pomieszczeń. Raporty, animacje, rekomendacje i wsparcie projektowe.</p>
+      </div>
+      <div class="col">
+        <strong>Podstawy oceny</strong>
+        <p>Rodzina PN‑EN 12101 (m.in. cz. 2, 6, 8), wytyczne projektowe oraz dobre praktyki inżynierskie. Zakres i kryteria każdorazowo opisujemy w raporcie.</p>
+      </div>
+      <div class="col">
+        <strong>Kontakt<\/strong>
+        <p><a href="#kontakt">Formularz \/ dane firmy<\/a><br><small>Uzupełnij e‑mail i telefon, aby włączyć przyciski szybkiego kontaktu.<\/small><\/p>
+      <\/div>
+      <\/div>
+    <p style="margin-top:8px">© <span id="year"></span> AntyOgień. Wszelkie prawa zastrzeżone.</p>
+  </div>
+
+  <a class="to-top" href="#top" aria-label="Do góry">↑</a>
+
+  <script>
+    // small runtime helpers
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <noscript>
+    <div class="container" style="margin:16px 0;">
+      <div class="card">Ta strona działa także bez JavaScript – jednak niektóre funkcje (np. pobranie checklisty) będą wyłączone.</div>
+    </div>
+  </noscript>
+</body>
+</html>
