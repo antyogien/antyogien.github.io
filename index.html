@@ -48,7 +48,11 @@
     }
     a { color: var(--brand); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .container {
+      max-width: clamp(320px, 82vw, 1440px);
+      margin: 0 auto;
+      padding: 0 clamp(16px, 4vw, 56px);
+    }
     header {
       position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(120%) blur(8px);
       background: color-mix(in oklab, var(--bg) 80%, transparent);
@@ -65,7 +69,7 @@
     nav a:hover { background: color-mix(in oklab, var(--card) 85%, transparent); text-decoration: none; }
     .hamb { display:none; background: none; border: none; padding: 8px; border-radius: 10px; }
 
-    .hero { padding: 48px 0 32px; }
+    .hero { padding: clamp(48px, 12vw, 128px) 0 clamp(32px, 8vw, 72px); }
     .hero h1 { font-size: clamp(28px, 4.2vw, 48px); line-height: 1.1; margin: 0 0 14px; }
     .hero p.lead { font-size: clamp(16px, 2.4vw, 20px); color: var(--muted); margin: 0 0 22px; }
     .cta { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -75,8 +79,8 @@
     .badges { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
     .badge { font-size: 13px; color: var(--text); border:1px solid color-mix(in oklab, var(--brand-2) 24%, transparent); padding:6px 10px; border-radius: 999px; background: color-mix(in oklab, var(--brand) 12%, transparent); }
 
-    section { padding: 44px 0; }
-    .grid { display:grid; gap:18px; grid-template-columns: repeat(12, 1fr); }
+    section { padding: clamp(44px, 7vw, 96px) 0; }
+    .grid { display:grid; gap: clamp(18px, 2.4vw, 32px); grid-template-columns: repeat(12, 1fr); }
     .card { background: color-mix(in oklab, var(--card) 96%, transparent); border: 1px solid color-mix(in oklab, var(--muted) 24%, transparent); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
     h2 { font-size: clamp(22px, 3vw, 34px); margin: 0 0 14px; }
     h3 { margin: 0 0 10px; font-size: 18px; }
@@ -242,7 +246,7 @@
   <style>
     /* tiny inline nav open state to keep CSS together */
     @media (max-width: 860px){
-      header nav { position: absolute; left: 8px; right: 8px; top: 62px; background: color-mix(in oklab, var(--bg) 96%, transparent); padding: 10px 14px; border: 1px solid color-mix(in oklab, var(--muted) 24%, transparent); border-radius: 12px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .18s ease, transform .18s ease; }
+      header nav { position: absolute; left: clamp(16px, 4vw, 56px); right: clamp(16px, 4vw, 56px); top: 62px; background: color-mix(in oklab, var(--bg) 96%, transparent); padding: 10px 14px; border: 1px solid color-mix(in oklab, var(--muted) 24%, transparent); border-radius: 12px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translateY(-6px); transition: opacity .18s ease, transform .18s ease; }
       header nav.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
       nav a { display:block; margin: 6px 0; }
       .hamb { display:inline-flex; }
